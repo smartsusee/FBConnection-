@@ -4,8 +4,9 @@ import { useEffect } from "react";
 import axios from "axios";
 
 function App() {
+  console.log("API URL:", process.env.REACT_APP_API_URL);
   useEffect(() => {
-    axios.get("http://localhost:4000/getData").then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/getData`).then((response) => {
       console.log(response.data);
     });
   }, []);
