@@ -5,13 +5,15 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+
+const dotenv = require("dotenv");
+dotenv.config();
 // middleware
+
 app.use(express.json());
 app.use(cors());
 mongoose
-  .connect(
-    "mongodb+srv://susee:KBg4hCfZ9xdIbkox@cluster0.jsinktk.mongodb.net/registerData?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect(process.env.DB)
   .then(() => {
     console.log("connected");
   })
@@ -78,8 +80,8 @@ app.delete("/DeleteUser/:id", async (req, res) => {
   }
 });
 
-app.listen(4000, () => {
-  console.log("server running port on 4000");
+app.listen(process.env.PORT, () => {
+  console.log(`server running port on ${process.env.PORT}`);
 });
 
 // get , post , put , delete
